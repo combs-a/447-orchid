@@ -1,7 +1,10 @@
 # Meeting 1
 **Date/Time:** 02/08/2025 @ 4:00 PM
+
 **Location:** Zoom
+
 **Objective:** Establish scope and beginning tasks
+
 **Team Members:** Anya, Pashia, Hunter, Alejandro, Marco
 
 **Tasks Allocated:**
