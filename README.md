@@ -17,3 +17,10 @@ For meeting logs, go to [meeting-log.md](https://github.com/combs-a/447-orchid/b
 - Email: alesan@ku.edu
 - Availability: Monday, Wednesday, Friday after 4 PM
 - Expertise: Javascript, Python, SQL
+
+
+## Pashia Vang
+- Role: Frontend Developer
+- Email: pashia.vang@ku.edu
+- Availability: Monday, Wednesday, Friday after 4 PM
+- Expertise: Python, SQL, MySQL
