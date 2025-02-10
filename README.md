@@ -11,3 +11,9 @@ For meeting logs, go to [meeting-log.md](https://github.com/combs-a/447-orchid/b
 - Email: combs.anya@ku.edu
 - Availability: Tuesday through Friday, 11 AM - 1 PM
 - Expertise: Python, SQL, React and Typescript
+
+## Alejandro Sandoval
+- Role: Database Designer
+- Email: alesan@ku.edu
+- Availability: Monday, Wednesday, Friday after 4 PM
+- Expertise: Javascript, Python, SQL
