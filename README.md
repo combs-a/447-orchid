@@ -30,3 +30,8 @@ For meeting logs, go to [meeting-log.md](https://github.com/combs-a/447-orchid/b
 - Email: hunter.long@ku.edu
 - Availabiliy: Monday, Wednesday after 12 PM; Tuesday, Thursday 11AM - 1PM
 - Expertise: JavaScript, Python, SQL, and React
+## Marco Martinez
+- Role: Frontend developer
+- Email: mmartinez231006@gmail.com
+- Availabiliy: Monday, Wednesday after 1 Pm
+- Expertise: JavaScript, Python, SQL, React, GDscript, and C
