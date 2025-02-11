@@ -33,5 +33,5 @@ For meeting logs, go to [meeting-log.md](https://github.com/combs-a/447-orchid/b
 ## Marco Martinez
 - Role: Frontend developer
 - Email: mmartinez231006@gmail.com
-- Availabiliy: Monday, Wednesday after 1 Pm
+- Availabiliy: Monday, Wednesday after 1pm, friday 11 am -1 pm
 - Expertise: JavaScript, Python, SQL, React, GDscript, and C
