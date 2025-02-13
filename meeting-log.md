@@ -22,7 +22,9 @@ Role decisions:
 - Hunter – Database Implementer
 - Marco – Front-End Developer
 - Alejandro – Database Designer
+
 Vision Statement: We are developing this library database to facilitate the easy management of a library.
+
 Scope Statement:
 - Items 
 - - Example items supported are: Books, Movies/TV, audiobooks, video games, and music
@@ -54,6 +56,7 @@ Anya: Contact professor for questions, label vision in README, create formal sco
 Pashia: Research if phpMyAdmin is inter-OS
 
 **Meeting Summary:**
+
 Discussion about what to use for backend:
 - phpMyAdmin, managing the database
 - - Need to do research for inter-OS interactions
