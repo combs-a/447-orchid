@@ -47,6 +47,7 @@ Scope Statement:
 **Team Members:** Anya, Pashia, Hunter, Alejandro, Marco
 
 **Tasks Allocated:**
+
 Anya: Contact professor for questions, label vision in README, create formal scope statement
 - Ask submission rules and if we can use phpMyAdmin
 
