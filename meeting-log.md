@@ -72,3 +72,38 @@ GitHub will be used to manage tasks and issues. An example database will be uplo
 
 **Next Meeting:**
 Requirements engineering – outlining functional requirements formally. 
+
+# Meeting 3
+**Date/Time:** February 23rd, 2025 @ 4:00 PM
+
+**Location:** Zoom/Discord
+
+**Objective:** Requirements engineering discussion and formalization
+
+**Team Members:** Anya Combs, Alejandro Sandoval, Marco Martinez, Hunter Long, Pashia Vang
+
+**Tasks Allocated:**
+
+This work should be completed by Wednesday, February 26th. This is so that it can be sent to a TA for review before final submission.
+- Anya: Complete the functional requirements section. Edit and formalize the requirements specifications document
+- Marco: Complete the account data entities
+- Hunter: Complete the items data entities section
+- Alejandro: Complete the loans and reservations data entities section
+- Pashia: Complete the introduction and stakeholders sections
+
+Non-time critical tasks:
+
+- Anya will create the Discord.
+- Once the EECS cycle server accounts are passed out, Marco and Alejandro will create the initial database and connection to phpMyAdmin, and Pashia will provide support if needed.
+
+**Notes:**
+
+We discussed the requirements specifications and formalized definitions for various parts of the projects. We assigned work for the document to each person.
+
+We made the decision to move to Discord, as Zoom has a 40-minute time limit on its meetings. Switching to Discord will make it easier to have longer meetings 
+
+**Tasks Completed:**
+
+Professor was asked the questions.
+- Submission rules: Project Lead is the only person who submits the project work.
+- phpMyAdmin: Can be used as long as there’s a deliverable on the Github as well
