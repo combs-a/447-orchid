@@ -107,3 +107,29 @@ We made the decision to move to Discord, as Zoom has a 40-minute time limit on i
 Professor was asked the questions.
 - Submission rules: Project Lead is the only person who submits the project work.
 - phpMyAdmin: Can be used as long as there’s a deliverable on the Github as well
+
+# Meeting 4
+
+**Date/Time:** March 9th, 2025
+
+**Location:** Discord
+
+**Objective:** Assign tasks for Project Part 3
+
+**Team Members:** Anya Combs, Marco Martinez, Pashia Vang, Hunter Long, 
+
+**Tasks Allocated:**
+
+- Anya: Create the drawio diagram to share via Google Drive and the conceptual modeling document
+
+Notes:
+
+For the ER diagram, we will use drawio. It saves to Google Drive, which allows all people to access the ER diagram and work on it. Since it’s midterms week, we expect to finish it closer to the end of the week.
+
+When people are free they can let the team know that they’re free in the Discord to be assigned a task.
+
+Scheduled a meeting for next week on Sunday, 4 PM to go over the ER diagram and finalize changes.
+
+Tasks Completed:
+
+- All tasks assigned from last week completed.
