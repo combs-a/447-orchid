@@ -116,7 +116,7 @@ Professor was asked the questions.
 
 **Objective:** Assign tasks for Project Part 3
 
-**Team Members:** Anya Combs, Marco Martinez, Pashia Vang, Hunter Long, 
+**Team Members:** Anya Combs, Marco Martinez, Pashia Vang, Hunter Long, Alejandro Sandoval
 
 **Tasks Allocated:**
 
@@ -133,3 +133,28 @@ Scheduled a meeting for next week on Sunday, 4 PM to go over the ER diagram and 
 Tasks Completed:
 
 - All tasks assigned from last week completed.
+
+# Meeting 5
+
+**Date/Time:** March 16th, 2025
+
+**Location:** Discord
+
+**Objective:** Discuss what needs to be completed for Project Part 3
+
+**Team Members:** Anya Combs, Pashia Vang, Alejandro Sandoval, Marco Martinez, Hunter Long
+
+**Tasks Allocated:**
+
+- Everyone must complete their sections of Project Part 3.
+- Anya: Review the document.
+
+**Notes:**
+
+Over the week, we assigned each team member to a section of the Conceptual Database document in the Discord. We met to check the progress before the submission deadline. The majority of the document was complete by the time of this meeting, with review needed.
+
+We will meet to discuss Project Part 4 and potential needed changes to the database on Wednesday afternoon.
+
+**Tasks Completed:**
+
+- Anya created the document and drawio.
