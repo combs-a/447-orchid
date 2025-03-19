@@ -158,3 +158,40 @@ We will meet to discuss Project Part 4 and potential needed changes to the datab
 **Tasks Completed:**
 
 - Anya created the document and drawio.
+
+# Meeting 6
+
+**Date/Time:** March 19th, 2025
+
+**Location:** Discord
+
+**Objective:** Discuss changes to the ER diagram
+
+**Team Members:** Anya Combs, Marco Martinez, Pashia Vang, Hunter Long, 
+
+**Tasks Allocated:**
+
+- Anya: Document creation for Part 4
+
+**Notes:**
+
+We discussed potential updates to the database schema.
+- Contributor (including Authors from the Book specialization): First and Last name, ID
+  - There may be a Contributors table to allow for multiple creators to be credited?
+  - If above is too difficult, fall back on a single primary creator
+- Additional fields for items:
+  - Descriptions
+  - Quantity
+  - Number of reservations
+  - Available
+- Specific relations for the Staff specialization need to be captured
+  - Manages items
+  - Manages other users
+- Changes to the user attributes
+  - First Name, Middle Initial, Last Initial
+
+The Conceptual Model should be updated before work on the relational schema is started.
+
+**Tasks Completed:**
+
+- Project Part 3 was completed and turned in on-time.
