@@ -110,7 +110,7 @@ Professor was asked the questions.
 
 # Meeting 4
 
-**Date/Time:** March 9th, 2025
+**Date/Time:** March 9th, 2025 @ 4:00 PM
 
 **Location:** Discord
 
@@ -136,7 +136,7 @@ Tasks Completed:
 
 # Meeting 5
 
-**Date/Time:** March 16th, 2025
+**Date/Time:** March 16th, 2025 @ 4:00 PM
 
 **Location:** Discord
 
@@ -161,7 +161,7 @@ We will meet to discuss Project Part 4 and potential needed changes to the datab
 
 # Meeting 6
 
-**Date/Time:** March 19th, 2025
+**Date/Time:** March 19th, 2025 @ 4:00 PM
 
 **Location:** Discord
 
@@ -195,3 +195,54 @@ The Conceptual Model should be updated before work on the relational schema is s
 **Tasks Completed:**
 
 - Project Part 3 was completed and turned in on-time.
+
+# Meeting 7
+
+**Date/Time:** March 30th, 2025 @ 4:00 PM
+
+**Location:** Discord
+
+**Objective:** Discuss the logical model and create a roadmap for the finished database
+
+**Team Members:** Anya Combs, Marco Martinez-Reyez, Pashia Vang, Alejandro Sandoval, Hunter Long
+
+**Tasks Allocated:**
+
+- Anya: Review and edit the logical model document and add the connections in the diagram.
+- Anya: Adding in the new entities/relations to represent picklists to older documents
+- Anya: Send the draft of part 4 for review to a TA
+- Everyone: Install the KU Anywhere VPN in order to work on the database and complete their section of the database implementation
+- Marco: UI Wireframe
+- Hunter: Sample Records
+
+**Notes:**
+
+While we did not meet in call for the past few weeks due to scheduling conflicts, we discussed the logical model in the Discord channel and allocated tasks to complete it.
+
+There were a few considerations that needed to be added, such as:
+- Picklists (Account Roles, Contributor Roles, Genres, Ratings)
+- Potential audit logs (For restriction updates, etc.) as a new optional requirement
+- Timestamp created/timestamp modified fields
+- Library Card Number needs to be added to accounts
+
+Team members should install the KU Anywhere VPN to access the database.
+
+We also decided on due dates for each section of the final database, so that we could be sure that we would be on-time with the completion.
+- Database completion (April 6th)
+  - Each person will create their own SQL tables.
+  - It will be hosted on Pashia's EECS database server.
+- Sample Records (April 10th)
+- Default SQL queries (April 13th)
+  - Each person will manage their own default SQL queries for updating database records, etc.
+- UI Wireframe (April 13th)
+- Report implementation (?)
+- Refinement will take place from the 20th to the 27th.
+
+Some concerns are with everyone logging into the database at the same time using the same credentials. On trial, Marco had issues logging in while Pashia was logged in, but otherwise no issues with multiple people being on the same account at the same time.
+
+Meeting at some point next week; tentative Sunday meeting in the evening. If not then, then Tuesday afternoon after class or later in the day as a check-in.
+
+**Tasks Completed:**
+
+- All updates to the schema were added.
+- Majority of Project Part 4 was completed.
