@@ -246,3 +246,38 @@ Meeting at some point next week; tentative Sunday meeting in the evening. If not
 
 - All updates to the schema were added.
 - Majority of Project Part 4 was completed.
+
+# Meeting 8
+
+**Date/Time:** April 13th, 2025 @ 4:00 PM
+
+**Location:** Discord
+
+**Objective:** Discuss the necessary pages and check-in
+
+**Team Members:** Anya Combs, Marco Martinez-Reyez, Pashia Vang, Alejandro Sandoval, Hunter Long
+
+**Tasks Allocated:**
+- Hunter and Alejandro: Complete inserting tables, create sample data
+- Marco: Wireframe by Monday, if not finished then Pashia will set it up
+- Anya: Update documents, create Project Part 5 documents
+- Frontend should be complete by 23rd latest to ensure thorough testing.
+
+**Notes:**
+
+We noted down all the necessary pages and features.
+
+Necessary pages:
+- Login page
+- Account page
+  - Account details
+  - Loan history
+  - Reservations
+  - Settings?
+- Search and results page
+  - Item dropdown
+  - Loan
+
+**Tasks Completed:**
+- Pashia, Marco and Anya completed table insertion
+- Logical model was turned in on time
