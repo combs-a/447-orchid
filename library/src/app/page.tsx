@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Navigator from '@/components/Navigator';
 
 export default function HomePage() {
   const [cardNumber, setCardNumber] = useState('');
@@ -32,8 +33,10 @@ export default function HomePage() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center h-screen bg-white px-4">
-      <h1 className="text-3xl font-bold mb-2">Library Website <span className="text-purple-600">Team Orchid</span></h1>
+    <main className='text-black'>
+      <Navigator />
+      <div className="flex flex-col items-center justify-center h-screen bg-white px-4 -mt-16">
+      <h1 className="text-3xl font-bold ">Orchid <span className="text-violet-800">Library</span></h1>
       <p className="text-gray-600 mb-6">We did a library database</p>
 
       <form onSubmit={handleSubmit} className="flex items-center gap-2">
@@ -53,6 +56,7 @@ export default function HomePage() {
       </form>
 
       {error && <p className="mt-4 text-red-600">{error}</p>}
+      </div>
     </main>
   );
 }
