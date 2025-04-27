@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import mysql, { RowDataPacket } from 'mysql2/promise';
+import { NextResponse } from "next/server";
+import mysql, { RowDataPacket } from "mysql2/promise";
 
 type ReservationWithItem = {
   reservation_id: number;
@@ -12,15 +12,17 @@ type ReservationWithItem = {
   reservation_amount: number;
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { account_id } = req.query;
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const account_id = searchParams.get("account_id");
 
-  if (!account_id || typeof account_id !== 'string') {
-    return res.status(400).json({ error: 'Missing or invalid account ID' });
+  if (!account_id) {
+    return NextResponse.json({ error: "Missing account ID" }, { status: 400 });
   }
 
+  let connection;
   try {
-    const connection = await mysql.createConnection({
+    connection = await mysql.createConnection({
       host: process.env.DB_HOST,
       port: Number(process.env.DB_PORT),
       user: process.env.DB_USER,
@@ -39,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         i.description,
         i.quantity_available,
         i.reservation_amount
-      FROM reservations r
+      FROM reservation r
       JOIN item i ON r.item_id = i.item_id
       WHERE r.account_id = ?
       ORDER BY r.reservation_date DESC
@@ -47,12 +49,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       [account_id]
     );
 
-    await connection.end();
-
-    const reservations = rows as ReservationWithItem[];
-    res.status(200).json(reservations);
+    return NextResponse.json(rows as ReservationWithItem[]);
   } catch (err) {
-    console.error('DB error:', err);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error("DB error:", err);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  } finally {
+    if (connection) {
+      await connection.end();
+    }
   }
 }

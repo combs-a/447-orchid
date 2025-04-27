@@ -52,11 +52,14 @@ export default function LoanHistory({ accountId }: { accountId: number }) {
               <div className="w-1/2 flex flex-col justify-between">
                 <div className="text-lg font-semibold">{loan.title}</div>
                 <div className="text-sm text-gray-600">
-                  Loaned on: {loan.loan_out_date}
+                  Loaned on: {loan.loan_out_date.slice(0, 10)}
                   <br />
-                  Due: {loan.due_date}
+                  Due: {loan.due_date.slice(0, 10)}
                   <br />
-                  Returned: {loan.return_date ?? "Not returned"}
+                  Returned:{" "}
+                  {loan.return_date
+                    ? loan.return_date.slice(0, 10)
+                    : "Not returned"}
                 </div>
               </div>
 

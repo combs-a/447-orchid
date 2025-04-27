@@ -55,9 +55,9 @@ export default function Reservations({ accountId }: { accountId: number }) {
                 <div className="text-sm text-gray-600">
                   Reserve Window:
                   <br />
-                  Start: {r.reservation_date}
+                  Start: {r.reservation_date.slice(0, 10)}
                   <br />
-                  End: {r.reservation_end_date}
+                  End: {r.reservation_end_date.slice(0, 10)}
                 </div>
               </div>
 

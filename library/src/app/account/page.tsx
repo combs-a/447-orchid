@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Navigator from "@/components/Navigator";
+import AccountDetails from "@/components/account/AccountDetails";
 import LoanHistory from "@/components/account/LoanHistory";
-import Reservations from '@/components/account/Reservations';
+import Reservations from "@/components/account/Reservations";
 
 type View = "details" | "history" | "reservations" | "settings";
 
@@ -59,7 +60,7 @@ export default function AccountPage() {
 
   return (
     <>
-      <Navigator />
+      <Navigator user={user} setUser={setUser} />
       <div className="flex h-screen text-black">
         {/* Sidebar */}
         <aside className="w-1/4 border-r p-4 bg-gray-50 space-y-4">
@@ -92,42 +93,14 @@ export default function AccountPage() {
         {/* Main Content */}
         <main className="w-3/4 p-6 border bg-white text-black">
           {/* Details about account holder. */}
-          {view === "details" && (
-            <div>
-              <h2 className="text-xl font-semibold mb-4">Account Details</h2>
-              <p>
-                <strong>Account ID:</strong> {user.account_id}
-              </p>
-              <p>
-                <strong>Name:</strong> {user.first_name}{" "}
-                {user.middle_initial ? user.middle_initial + "." : ""}{" "}
-                {user.last_name}
-              </p>
-              <p>
-                <strong>Library Card Number:</strong> {user.card_number}
-              </p>
-              <p>
-                <strong>Birthdate:</strong> {user.birthdate}
-              </p>
-              <p>
-                <strong>Restricted:</strong> {user.restricted ? "Yes" : "No"}
-              </p>
-              <p>
-                <strong>Contact Info:</strong>
-              </p>
-              <ul className="ml-4 list-disc">
-                <li>Email: {user.email}</li>
-                {user.phone_number && <li>Phone: {user.phone_number}</li>}
-                {user.address && <li>Address: {user.address}</li>}
-              </ul>
-            </div>
-          )}
+          {view === "details" && <AccountDetails user={user} />}
 
           {/* History of Loans & Reservations*/}
-          {view === 'history' && <LoanHistory accountId={user.account_id} />}
+          {view === "history" && <LoanHistory accountId={user.account_id} />}
 
-          {view === 'reservations' && <Reservations accountId={user.account_id} />}
-
+          {view === "reservations" && (
+            <Reservations accountId={user.account_id} />
+          )}
 
           {/* Account Settings */}
           {view === "settings" && (
