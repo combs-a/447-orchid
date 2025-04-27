@@ -1,0 +1,21 @@
+"account_id","first_name","last_name","middle_initial","card_number","account_type_id","restricted","address","birthdate","email","phone_number","parent_id"
+"1","peter","jones","b","1523510581525","1","0","1234 south boulevard, Lawerence, Kansas, 66044","2000-04-09","pbj@gmail.com","5550140901",NULL
+"2","Mike","Truk","A","1001233333333","1","0","1234 West 21st Street, Lawrence, Kansas, 66046","1984-02-01","mtruck@gmail.com","5550140444",NULL
+"3","Steve","Truk","B","3242342342344","2","1","508 Massachusetts Street, Lawrence, Kansas, 66044","2003-11-10","struck@gmail.com",NULL,"2"
+"4","Sophia","Garcia","L","1523510581528","2","1","2317 Barker Avenue, Lawrence, Kansas, 66046","2010-02-03","s.garcia@yahoo.com","5550140912","1"
+"5","Noah","Patel","T","1523510581529","1","0","900 New Hampshire Street, Lawrence, Kansas, 66044","1995-06-11","noah.patel@outlook.com","5550140904",NULL
+"6","Ava","Martin","E","1523510581530","2","0","1603 Kentucky Street, Lawrence, Kansas, 66044","2006-09-23","ava.martin@gmail.com","5550140920","3"
+"7","Liam","Khan","H","1523510581531","1","0","741 Monterey Way, Lawrence, Kansas, 66049","1989-11-04","liam.khan@icloud.com","5550140905",NULL
+"8","Isabella","Williams","M","1523510581532","2","1","1820 Haskell Avenue, Lawrence, Kansas, 66046","2011-01-12","izzyw@gmail.com","5550140951","5"
+"9","Ethan","Kim","S","1523510581533","1","0","1005 Emery Road, Lawrence, Kansas, 66044","2002-05-19","ethankim@gmail.com","5550140963",NULL
+"10","Grace","Hernandez","A","1523510581534","2","0","4501 Overland Drive, Lawrence, Kansas, 66049","2008-08-28","grace.hz@hotmail.com","5550140992","9"
+"11","Jacob","Reed","M","1523510581535","1","0","1234 West 21st Street, Lawrence, Kansas, 66046","1992-03-15","jreed92@gmail.com","5550140911",NULL
+"12","Olivia","Taylor","K","1523510581536","2","1","508 Massachusetts Street, Lawrence, Kansas, 66044","2009-07-30","oliviat@gmail.com","5550140912","11"
+"13","Benjamin","Brown","C","1523510581537","1","0","2317 Barker Avenue, Lawrence, Kansas, 66046","1987-11-11","bbrown87@hotmail.com","5550140913",NULL
+"14","Mia","Davis","R","1523510581538","2","0","900 New Hampshire Street, Lawrence, Kansas, 66044","2006-02-25","miadavis@yahoo.com","5550140914","13"
+"15","James","Hall","T","1523510581539","1","0","1603 Kentucky Street, Lawrence, Kansas, 66044","1996-09-09","jhall.ks@gmail.com","5550140915",NULL
+"16","Chloe","Young","E","1523510581540","2","0","741 Monterey Way, Lawrence, Kansas, 66049","2010-06-18","chloe.young@gmail.com","5550140916","15"
+"17","Daniel","Moore","L","1523510581541","1","0","1820 Haskell Avenue, Lawrence, Kansas, 66046","1990-05-03","dmoore90@outlook.com","5550140917",NULL
+"18","Avery","Scott","S","1523510581542","2","1","1005 Emery Road, Lawrence, Kansas, 66044","2008-12-01","avery.scott@gmail.com","5550140918","17"
+"19","Lucas","Cook","H","1523510581543","1","0","4501 Overland Drive, Lawrence, Kansas, 66049","1993-08-19","lucas.cook@hotmail.com","5550140919",NULL
+"20","Ella","Bailey","N","1523510581544","2","0","2200 Harper Street, Lawrence, Kansas, 66046","2007-10-22","ella.bailey@gmail.com","5550140920","19"
