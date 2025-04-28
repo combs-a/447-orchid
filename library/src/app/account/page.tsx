@@ -9,7 +9,7 @@ import Reservations from "@/components/account/Reservations";
 
 type View = "details" | "history" | "reservations" | "settings";
 
-type Account = {
+ export type Account = {
   account_id: number;
   first_name: string;
   last_name: string;

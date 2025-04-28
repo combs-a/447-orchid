@@ -1,19 +1,36 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Navigator from "@/components/Navigator";
 import Results from "@/components/Inventory/results";
 import Filter from "@/components/Inventory/Filter";
 import Sort from "@/components/Inventory/Sort";
 
+type Account = {
+  first_name: string;
+  last_name: string;
+  card_number: string;
+};
+
 export default function InventoryPage() {
-  const searchParams = useSearchParams();
   const router = useRouter();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filter, setFilter] = useState('All');
-  const [sort, setSort] = useState('A-Z');
+  const [user, setUser] = useState<Account | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filter, setFilter] = useState("All");
+  const [sort, setSort] = useState("A-Z");
   const [items, setItems] = useState([]);
+
+ 
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
+    } else {
+      router.push("/");
+    }
+  }, [router]);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -41,7 +58,7 @@ export default function InventoryPage() {
 
   return (
     <>
-      <Navigator user={null} setUser={() => null} />
+      <Navigator user={user} setUser={setUser} />
 
       <div className="flex h-screen text-black">
         {/* Sidebar */}
@@ -54,13 +71,27 @@ export default function InventoryPage() {
             className="border px-4 py-2 rounded w-full"
           />
 
-          <Filter value={filter} onChange={setFilter} />
-          <Sort value={sort} onChange={setSort} />
+          {/* Filter and Sort Section */}
+          <div className="flex items-center space-x-2 whitespace-nowrap">
+            {/* Filter Section */}
+            <div className="flex items-center space-x-2">
+              <p className="font-bold">Filter by:</p>
+              <Filter value={filter} onChange={setFilter} />
+            </div>
+
+            {/* Sort Section */}
+            <div className="flex items-center space-x-2">
+              <p className="font-bold">Sort by:</p>
+              <Sort value={sort} onChange={setSort} />
+            </div>
+          </div>
         </aside>
 
         {/* Main Content */}
         <main className="w-3/4 p-6 border bg-white text-black">
-          <Results items={items} />
+          <div className="h-full overflow-y-auto border rounded p-4">
+            <Results items={items} />
+          </div>
         </main>
       </div>
     </>

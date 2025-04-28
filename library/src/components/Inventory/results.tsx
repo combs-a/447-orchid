@@ -6,7 +6,7 @@ type Item = {
   description: string;
   quantity_available: number;
   publication_year: number;
-  author_name: string;
+  contributors: string | null; // Include contributors field
 };
 
 export default function InventoryResults({ items }: { items: Item[] }) {
@@ -17,6 +17,9 @@ export default function InventoryResults({ items }: { items: Item[] }) {
           <div key={item.item_id} className="border p-4 rounded shadow-sm">
             <h2 className="text-xl font-bold mb-2">{item.title}</h2>
             <p className="text-gray-700 mb-2">{item.description}</p>
+            <p className="text-gray-500 mb-2">
+              Contributors: {item.contributors || "N/A"}
+            </p>
             <p className="text-gray-500 mb-4">
               Available: {item.quantity_available}
             </p>
