@@ -15,7 +15,7 @@ export default function Navigator({ user, setUser }: NavigatorProps) {
   const navItems = [
     { name: 'Home', href: '/' },
     ...(user ? [{ name: 'Account', href: `/account?card=${user.card_number}` }] : []),
-    { name: 'Inventory', href: '/inventory' },
+    { name: 'Inventory', href: "/Inventory" },
   ];
 
   return (
