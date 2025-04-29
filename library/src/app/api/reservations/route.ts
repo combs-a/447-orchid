@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import mysql, { RowDataPacket } from "mysql2/promise";
+import mysql, { RowDataPacket, ResultSetHeader } from "mysql2/promise";
 
 type ReservationWithItem = {
   reservation_id: number;
@@ -53,6 +53,66 @@ export async function GET(req: Request) {
   } catch (err) {
     console.error("DB error:", err);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  } finally {
+    if (connection) {
+      await connection.end();
+    }
+  }
+}
+// POST: for creating a new reservation
+export async function POST(req: Request) {
+  const { item_id, account_id, reservation_date, reservation_end_date } = await req.json();
+
+  // Validate required fields
+  if (!item_id || !account_id || !reservation_date || !reservation_end_date) {
+    return NextResponse.json(
+      { error: "Missing required fields" },
+      { status: 400 }
+    );
+  }
+
+  let connection;
+  try {
+    // Connect to the database
+    connection = await mysql.createConnection({
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+    });
+
+    // Start a transaction
+    await connection.beginTransaction();
+
+    // Insert the reservation into the `reservations` table
+    const insertReservationSQL = `
+      INSERT INTO reservation (item_id, account_id, reservation_date, reservation_end_date)
+      VALUES (?, ?, ?, ?)
+    `;
+    console.log("Executing SQL:", insertReservationSQL);
+
+    const [reservationResult] = await connection.execute<ResultSetHeader>(
+      insertReservationSQL,
+      [item_id, account_id, reservation_date, reservation_end_date]
+    );
+
+    // Commit the transaction
+    await connection.commit();
+
+    return NextResponse.json({ success: true, reservation_id: reservationResult.insertId });
+  } catch (err) {
+    console.error("Error creating reservation:", err);
+
+    // Rollback the transaction in case of an error
+    if (connection) {
+      await connection.rollback();
+    }
+
+    return NextResponse.json(
+      { error: "Failed to create reservation" },
+      { status: 500 }
+    );
   } finally {
     if (connection) {
       await connection.end();

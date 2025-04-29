@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import MakeLoanPopup from "@/components/Inventory/makeLoanPopup";
+import MakeReservationPopup from "@/components/Inventory/makeReservationPopup";
 
 type Item = {
   item_id: number;
@@ -20,11 +21,16 @@ export default function InventoryResults({
   accountId: number;
 }) {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const [reservationItem, setReservationItem] = useState<Item | null>(null);
 
   const handleLoanSuccess = () => {
     alert("Loan created successfully!");
-    setSelectedItem(null); // Close the popup
-    // Optionally, refresh the inventory list here
+    setSelectedItem(null); // Close the loan popup
+  };
+
+  const handleReservationSuccess = () => {
+    alert("Reservation created successfully!");
+    setReservationItem(null); // Close the reservation popup
   };
 
   return (
@@ -41,12 +47,21 @@ export default function InventoryResults({
               Available: {item.quantity_available}
             </p>
             <div className="flex space-x-2">
-              <button
-                onClick={() => setSelectedItem(item)}
-                className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
-              >
-                Make a Loan
-              </button>
+              {item.quantity_available > 0 ? (
+                <button
+                  onClick={() => setSelectedItem(item)}
+                  className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+                >
+                  Make a Loan
+                </button>
+              ) : (
+                <button
+                  onClick={() => setReservationItem(item)}
+                  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                >
+                  Reserve Item
+                </button>
+              )}
             </div>
           </div>
         ))
@@ -57,9 +72,18 @@ export default function InventoryResults({
       {selectedItem && (
         <MakeLoanPopup
           item={selectedItem}
-          accountId={accountId} // Pass the accountId here
+          accountId={accountId}
           onClose={() => setSelectedItem(null)}
           onLoanSuccess={handleLoanSuccess}
+        />
+      )}
+
+      {reservationItem && (
+        <MakeReservationPopup
+          item={reservationItem}
+          accountId={accountId}
+          onClose={() => setReservationItem(null)}
+          onReservationSuccess={handleReservationSuccess}
         />
       )}
     </div>
