@@ -8,6 +8,7 @@ import Filter from "@/components/Inventory/Filter";
 import Sort from "@/components/Inventory/Sort";
 
 type Account = {
+  account_id: number; 
   first_name: string;
   last_name: string;
   card_number: string;
@@ -21,11 +22,18 @@ export default function InventoryPage() {
   const [sort, setSort] = useState("A-Z");
   const [items, setItems] = useState([]);
 
- 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
+    const storedAccountId = localStorage.getItem("account_id");
+  
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
+  
+      // Update the account_id in the user object
+      if (storedAccountId) {
+        parsedUser.account_id = Number(storedAccountId);
+      }
+  
       setUser(parsedUser);
     } else {
       router.push("/");
@@ -90,7 +98,7 @@ export default function InventoryPage() {
         {/* Main Content */}
         <main className="w-3/4 p-6 border bg-white text-black">
           <div className="h-full overflow-y-auto border rounded p-4">
-            <Results items={items} />
+            {user && <Results items={items} accountId={user.account_id} />}
           </div>
         </main>
       </div>

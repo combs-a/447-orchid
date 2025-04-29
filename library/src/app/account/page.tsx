@@ -43,6 +43,7 @@ export default function AccountPage() {
         const data = await res.json();
         if (res.ok) {
           setUser(data);
+          localStorage.setItem("account_id", data.account_id);
         } else {
           console.error("User not found");
           router.push("/");
