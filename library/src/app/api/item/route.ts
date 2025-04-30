@@ -28,6 +28,14 @@ export async function GET(req: Request) {
   const search = searchParams.get('search') || '';
   const filter = searchParams.get('filter') || 'All';
   const sort = searchParams.get('sort') || 'A-Z';
+  // Advanced search parameters:
+  const author = searchParams.get('author') || '';
+  const releaseYear = searchParams.get('releaseYear') || '';
+  const isbn = searchParams.get('isbn') || '';
+  const issueNumber = searchParams.get('issueNumber') || '';
+  const genreParam = searchParams.get('genre') || '';
+  const ageRating = searchParams.get('ageRating') || '';
+
 
   let connection;
   try {
@@ -83,20 +91,34 @@ if (item_id) {
     params.push(filter);
   }
 
+   // Append advanced filters if provided
+   // object Map of advanced filters
+   const advancedFilters = [
+    { param: author, clause: "(co.first_name LIKE ? OR co.last_name LIKE ?)", values: [`%${author}%`, `%${author}%`] },
+    { param: releaseYear, clause: "i.publication_year = ?", values: [releaseYear] },
+    { param: isbn, clause: "i.isbn LIKE ?", values: [`%${isbn}%`] },
+    { param: issueNumber, clause: "i.issue_number = ?", values: [issueNumber] },
+    { param: genreParam, clause: "g.genre_name LIKE ?", values: [`%${genreParam}%`] },
+    { param: ageRating, clause: "ra.rating_name = ?", values: [ageRating] }
+  ];
+  // Loop over advanced filters and append if the parameter is provided
+  advancedFilters.forEach(filterItem => {
+    filterItem.param && (query += ` AND ${filterItem.clause}`, params.push(...filterItem.values));
+  });
+
   // avoids duplicates in the result set
   query += `
     GROUP BY i.item_id
   `;
-//handles the sorting of the results based on the selected sort option
-  if (sort === 'A-Z') {
-    query += ` ORDER BY i.title ASC`;
-  } else if (sort === 'Z-A') {
-    query += ` ORDER BY i.title DESC`;
-  } else if (sort === 'Newest') {
-    query += ` ORDER BY i.publication_year DESC`;
-  } else if (sort === 'Oldest') {
-    query += ` ORDER BY i.publication_year ASC`;
-  }
+//handles the sorting of the results based on the selected sort option 
+// converted to an object map
+const sortMap: { [key: string]: string } = {
+  "A-Z": " ORDER BY i.title ASC",
+  "Z-A": " ORDER BY i.title DESC",
+  "Newest": " ORDER BY i.publication_year DESC",
+  "Oldest": " ORDER BY i.publication_year ASC"
+};
+query += sortMap[sort] || "";
 }
     
 

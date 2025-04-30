@@ -95,7 +95,7 @@ export default function InventoryPage() {
             className="border px-4 py-2 rounded w-full"
           />
 
-          {/* Toggle button for advanced options */}
+          {/* toggle button for advanced options */}
           <button
             onClick={() => setShowAdvanced(!showAdvanced)}
             className="text-blue-600 hover:text-gray-700"
@@ -103,7 +103,7 @@ export default function InventoryPage() {
             {showAdvanced ? "Hide Advanced Options" : "Show Advanced Options"}
           </button>
 
-          {/* Advanced search fields in an expandable panel */}
+          {/* advanced search fields in an expandable panel */}
           {showAdvanced && (
             <div className="mt-4 space-y-3 border-t pt-4">
               <div>
@@ -112,14 +112,14 @@ export default function InventoryPage() {
                   type="text"
                   placeholder="Enter author name"
                   value={author}
-                  onChange={(e) => setAuthor(e.target.value)}
+                  onChange={(e) => setAuthor((e.target.value))}
                   className="border px-4 py-2 rounded w-full"
                 />
               </div>
               <div>
                 <label className="block mb-1">Release Year:</label>
                 <input 
-                  type="number"
+                  type="interger"
                   placeholder="Enter release year"
                   value={releaseYear}
                   onChange={(e) => setReleaseYear(e.target.value)}
