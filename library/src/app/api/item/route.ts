@@ -6,7 +6,7 @@ type Item = {
     item_type_name: string;
     title: string;
     description: string;
-    genre_id: number;
+    genre_name: number;
     isbn: string;
     publication_year: number;
     publication_date: string;
@@ -17,7 +17,9 @@ type Item = {
     total_quantity: number;
     quantity_available: number;
     reservation_amount: number;
-    contributors: string | null;
+    contributor_f_name: string | null;
+    contributor_l_name: string | null;
+    contributor_role_name: string | null;
   };
 
 export async function GET(req: Request) {
@@ -43,7 +45,7 @@ export async function GET(req: Request) {
     it.item_type_name,
     i.title,
     i.description,
-    g.genre_id,
+    g.genre_name,
     i.isbn,
     i.publication_year,
     i.publication_date,
@@ -54,10 +56,9 @@ export async function GET(req: Request) {
     i.total_quantity,
     i.quantity_available,
     i.reservation_amount,
-    COALESCE(
-      GROUP_CONCAT(DISTINCT CONCAT(co.First_name," ", co.Last_name, ' (', r.role_name, ')') SEPARATOR ', '),
-      'N/A'
-    ) AS contributors
+    co.first_name AS contributor_f_name,
+    co.last_name AS contributor_l_name,
+    r.role_name AS contributor_role_name
   FROM item i
   LEFT JOIN item_type it ON i.item_type_id = it.item_type_id
   LEFT JOIN rating ra ON i.rating_id = ra.rating_id
