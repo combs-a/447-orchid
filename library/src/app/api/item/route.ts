@@ -13,7 +13,7 @@ type Item = {
     publisher: string;
     issue_number: number | null;
     explicit: boolean;
-    rating_id: number | null;
+    rating_name: number | null;
     total_quantity: number;
     quantity_available: number;
     reservation_amount: number;
@@ -76,16 +76,18 @@ if (item_id) {
 } else {
   query += ` WHERE i.title LIKE ?`;
   params.push(`%${search}%`);
-
+// sets the filter to the default value of 'All' if no filter is selecte, then appends
+// the currently selected filter to the query if it is not 'All'
   if (filter !== 'All') {
     query += ` AND it.item_type_name = ?`;
     params.push(filter);
   }
 
+  // avoids duplicates in the result set
   query += `
     GROUP BY i.item_id
   `;
-
+//handles the sorting of the results based on the selected sort option
   if (sort === 'A-Z') {
     query += ` ORDER BY i.title ASC`;
   } else if (sort === 'Z-A') {

@@ -18,22 +18,30 @@ export default function InventoryPage() {
   const router = useRouter();
   const [user, setUser] = useState<Account | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
+  // Advanced search states:
+  const [author, setAuthor] = useState("");
+  const [releaseYear, setReleaseYear] = useState("");
+  const [isbn, setIsbn] = useState("");
+  const [issueNumber, setIssueNumber] = useState("");
+  const [genre, setGenre] = useState("");
+  const [ageRating, setAgeRating] = useState("");
+  
   const [filter, setFilter] = useState("All");
   const [sort, setSort] = useState("A-Z");
   const [items, setItems] = useState([]);
+  
+  // State to control the advanced options panel
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const storedAccountId = localStorage.getItem("account_id");
-  
+
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
-  
-      // Update the account_id in the user object
       if (storedAccountId) {
         parsedUser.account_id = Number(storedAccountId);
       }
-  
       setUser(parsedUser);
     } else {
       router.push("/");
@@ -43,10 +51,17 @@ export default function InventoryPage() {
   useEffect(() => {
     const fetchItems = async () => {
       try {
+        // Build query params including advanced search fields
         const query = new URLSearchParams({
           search: searchTerm,
+          author,
+          releaseYear,
+          isbn,
+          issueNumber,
+          genre,
+          ageRating,
           filter,
-          sort,
+          sort
         }).toString();
 
         const res = await fetch(`/api/item?${query}`);
@@ -62,7 +77,7 @@ export default function InventoryPage() {
     };
 
     fetchItems();
-  }, [searchTerm, filter, sort]);
+  }, [searchTerm, author, releaseYear, isbn, issueNumber, genre, ageRating, filter, sort]);
 
   return (
     <>
@@ -71,23 +86,99 @@ export default function InventoryPage() {
       <div className="flex h-screen text-black">
         {/* Sidebar */}
         <aside className="w-1/4 border-r p-4 bg-gray-50 space-y-4">
+          <label className="block mb-1">Search Title:</label>
           <input
             type="text"
-            placeholder="Search for items in the library"
+            placeholder="Search by title"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="border px-4 py-2 rounded w-full"
           />
 
-          {/* Filter and Sort Section */}
+          {/* Toggle button for advanced options */}
+          <button
+            onClick={() => setShowAdvanced(!showAdvanced)}
+            className="text-blue-600 hover:text-gray-700"
+          >
+            {showAdvanced ? "Hide Advanced Options" : "Show Advanced Options"}
+          </button>
+
+          {/* Advanced search fields in an expandable panel */}
+          {showAdvanced && (
+            <div className="mt-4 space-y-3 border-t pt-4">
+              <div>
+                <label className="block mb-1">Author Name:</label>
+                <input 
+                  type="text"
+                  placeholder="Enter author name"
+                  value={author}
+                  onChange={(e) => setAuthor(e.target.value)}
+                  className="border px-4 py-2 rounded w-full"
+                />
+              </div>
+              <div>
+                <label className="block mb-1">Release Year:</label>
+                <input 
+                  type="number"
+                  placeholder="Enter release year"
+                  value={releaseYear}
+                  onChange={(e) => setReleaseYear(e.target.value)}
+                  className="border px-4 py-2 rounded w-full"
+                />
+              </div>
+              <div>
+                <label className="block mb-1">ISBN:</label>
+                <input 
+                  type="text"
+                  placeholder="Enter ISBN"
+                  value={isbn}
+                  onChange={(e) => setIsbn(e.target.value)}
+                  className="border px-4 py-2 rounded w-full"
+                />
+              </div>
+              <div>
+                <label className="block mb-1">Issue Number:</label>
+                <input 
+                  type="text"
+                  placeholder="Enter issue number"
+                  value={issueNumber}
+                  onChange={(e) => setIssueNumber(e.target.value)}
+                  className="border px-4 py-2 rounded w-full"
+                />
+              </div>
+              <div>
+                <label className="block mb-1">Genre:</label>
+                <input 
+                  type="text"
+                  placeholder="Enter genre name"
+                  value={genre}
+                  onChange={(e) => setGenre(e.target.value)}
+                  className="border px-4 py-2 rounded w-full"
+                />
+              </div>
+              <div>
+                <label className="block mb-1">Age Rating:</label>
+                <select 
+                  value={ageRating}
+                  onChange={(e) => setAgeRating(e.target.value)}
+                  className="border px-4 py-2 rounded w-full"
+                >
+                  <option value="">Select rating</option>
+                  <option value="G">G</option>
+                  <option value="PG">PG</option>
+                  <option value="PG-13">PG-13</option>
+                  <option value="R">R</option>
+                  <option value="NC-17">NC-17</option>
+                </select>
+              </div>
+            </div>
+          )}
+
           <div className="flex items-center space-x-2 whitespace-nowrap">
-            {/* Filter Section */}
             <div className="flex items-center space-x-2">
               <p className="font-bold">Filter by:</p>
               <Filter value={filter} onChange={setFilter} />
             </div>
-
-            {/* Sort Section */}
             <div className="flex items-center space-x-2">
               <p className="font-bold">Sort by:</p>
               <Sort value={sort} onChange={setSort} />

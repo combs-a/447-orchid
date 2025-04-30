@@ -4,14 +4,14 @@ import { useState } from "react";
 import MakeLoanPopup from "@/components/Inventory/makeLoanPopup";
 import MakeReservationPopup from "@/components/Inventory/makeReservationPopup";
 
-// Item type
+// Item type, servers to retreive the relevant for results from the API
 type Item = {
   item_id: number;
   title: string;
   description: string;
   quantity_available: number;
   publication_year: number;
-  contributor_f_name: string ; // First name of the contributor
+  contributor_f_name: string ; // First name of the contributor Concatenated at the rendering stage
   contributor_l_name: string ; // Last name of the contributor
   contributor_role_name: string ; // Role of the contributor
 };
@@ -44,6 +44,7 @@ export default function InventoryResults({
             <h2 className="text-xl font-bold mb-2">{item.title}</h2>
             <p className="text-gray-700 mb-2">{item.description}</p>
             <p className="text-gray-500 mb-2">
+              {/*concatenates contributor information for display */}
               Contributors:{`${item.contributor_f_name} ${item.contributor_l_name} (${item.contributor_role_name}) `}
             </p>
             <p className="text-gray-500 mb-4">
