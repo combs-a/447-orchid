@@ -45,7 +45,7 @@ export default function Navigator({ user, setUser }: NavigatorProps) {
             setUser(null);
             router.push('/');
           }}
-          className="absolute right-6 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500 transition"
+          className="absolute right-6 bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-500 transition"
         >
           Sign Out
         </button>
