@@ -6,6 +6,7 @@ import Navigator from "@/components/Navigator";
 import AccountDetails from "@/components/account/AccountDetails";
 import LoanHistory from "@/components/account/LoanHistory";
 import Reservations from "@/components/account/Reservations";
+import AccountSettings from "@/components/account/AccountSettings";
 
 type View = "details" | "history" | "reservations" | "settings";
 
@@ -103,12 +104,8 @@ export default function AccountPage() {
           )}
 
           {/* Account Settings */}
-          {view === "settings" && (
-            <div>
-              <h2 className="text-xl font-semibold mb-4">Account Settings</h2>
-              <p>Update your preferences here.</p>
-            </div>
-          )}
+          {view === "settings" && <AccountSettings user={user} setUser={setUser} />} 
+          
         </main>
       </div>
     </>
