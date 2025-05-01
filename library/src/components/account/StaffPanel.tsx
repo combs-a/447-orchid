@@ -99,7 +99,7 @@ export default function StaffPanel() {
   };
 
   return (
-    <div className="space-y-6 overflow-auto">
+    <div className="space-y-6 h-[200vh] overflow-auto">
       <h1 className="text-xl font-bold mb-4">Staff Management</h1>
       <div className="border rounded shadow p-6">
         {/* Account Lookup */}
