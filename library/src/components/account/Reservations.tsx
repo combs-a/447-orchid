@@ -48,6 +48,7 @@ export default function Reservations({ accountId }: { accountId: number }) {
               key={r.reservation_id}
               className="flex border rounded-lg shadow-sm p-4 gap-4 bg-white"
             >
+              {/* Text content */}
               {/* Left Side */}
               <div className="w-1/2 flex flex-col justify-between">
                 <div className="text-lg font-semibold">{r.title}</div>
@@ -62,9 +63,7 @@ export default function Reservations({ accountId }: { accountId: number }) {
 
               {/* Right Side */}
               <div className="w-1/2 flex flex-col justify-between text-sm text-gray-700">
-                <p className="font-medium">
-                  <strong>Additional Information</strong>
-                </p>
+                <p className="font-medium"><strong>Additional Information</strong></p>
                 <p>{r.description}</p>
                 <p>
                   <strong>Available:</strong> {r.quantity_available}
@@ -72,38 +71,6 @@ export default function Reservations({ accountId }: { accountId: number }) {
                 <p>
                   <strong>Reserved:</strong> {r.reservation_amount}
                 </p>
-
-                {new Date(r.reservation_end_date) > new Date() && (
-                  <button
-                    onClick={async () => {
-                      try {
-                        const res = await fetch(`/api/reservations/cancel`, {
-                          method: "POST",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({
-                            reservation_id: r.reservation_id,
-                          }),
-                        });
-                        if (res.ok) {
-                          alert("Reservation canceled!");
-                          setReservations(
-                            reservations.filter(
-                              (resv) => resv.reservation_id !== r.reservation_id
-                            )
-                          );
-                        } else {
-                          alert("Failed to cancel reservation.");
-                        }
-                      } catch (err) {
-                        console.error(err);
-                        alert("Error canceling reservation.");
-                      }
-                    }}
-                    className="mt-2 bg-red-500 hover:bg-red-600 text-white text-sm px-3 py-1 rounded"
-                  >
-                    Cancel Reservation
-                  </button>
-                )}
               </div>
             </div>
           ))}

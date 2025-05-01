@@ -63,7 +63,7 @@ export default function LoanHistory({ accountId }: { accountId: number }) {
                 </div>
               </div>
 
-              {/* Right: Item info + return button */}
+              {/* Right: Item info */}
               <div className="w-1/2 flex flex-col justify-between text-sm text-gray-700">
                 <p className="font-medium">
                   <strong>Additional Information</strong>
@@ -72,37 +72,6 @@ export default function LoanHistory({ accountId }: { accountId: number }) {
                 <p>
                   <strong>Quantity Available:</strong> {loan.quantity_available}
                 </p>
-
-                {!loan.return_date && (
-                  <button
-                    onClick={async () => {
-                      try {
-                        const res = await fetch(`/api/loans/return`, {
-                          method: "POST",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({ loan_id: loan.loan_id }),
-                        });
-                        if (res.ok) {
-                          alert("Item returned!");
-                          const updatedLoans = loans.map((l) =>
-                            l.loan_id === loan.loan_id
-                              ? { ...l, return_date: new Date().toISOString() }
-                              : l
-                          );
-                          setLoans(updatedLoans);
-                        } else {
-                          alert("Failed to return item.");
-                        }
-                      } catch (err) {
-                        console.error(err);
-                        alert("Error returning item.");
-                      }
-                    }}
-                    className="mt-2 bg-green-600 hover:bg-green-700 text-white text-sm px-3 py-1 rounded"
-                  >
-                    Return Item
-                  </button>
-                )}
               </div>
             </div>
           ))}
