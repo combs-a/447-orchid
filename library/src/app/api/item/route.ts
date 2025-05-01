@@ -18,6 +18,7 @@ type Item = {
     quantity_available: number;
     reservation_amount: number;
     contributor_f_name: string | null;
+    contributor_middle_name: string | null;
     contributor_l_name: string | null;
     contributor_role_name: string | null;
   };
@@ -66,6 +67,7 @@ export async function GET(req: Request) {
     i.reservation_amount,
     co.first_name AS contributor_f_name,
     co.last_name AS contributor_l_name,
+    co.middle_initial AS contributor_middle_name,
     r.role_name AS contributor_role_name
   FROM item i
   LEFT JOIN item_type it ON i.item_type_id = it.item_type_id
@@ -106,10 +108,7 @@ if (item_id) {
     filterItem.param && (query += ` AND ${filterItem.clause}`, params.push(...filterItem.values));
   });
 
-  // avoids duplicates in the result set
-  query += `
-    GROUP BY i.item_id
-  `;
+
 //handles the sorting of the results based on the selected sort option 
 // converted to an object map
 const sortMap: { [key: string]: string } = {
