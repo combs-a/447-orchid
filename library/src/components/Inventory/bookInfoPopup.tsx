@@ -4,6 +4,7 @@ import Popup from "@/components/Popup";
 
 type Item = {
   item_id: number;
+  item_type_name: string;
   title: string;
   description: string;
   isbn: string;
@@ -13,6 +14,8 @@ type Item = {
   explicit: boolean;
   publication_year: number;
   total_quantity: number;
+  rating_name: number | null;
+  genre_name: number;
   reservation_amount: number;
   contributor_f_name: string;
   contributor_l_name: string;
@@ -57,6 +60,12 @@ export default function BookInfoPopup({ item, onClose }: BookInfoPopupProps) {
         </p>
         <p>
           <strong>Contributors:</strong> {`${item.contributor_f_name} ${item.contributor_l_name} (${item.contributor_role_name})`}
+        </p>
+        <p>
+          <strong>Genre:</strong> {`${item.genre_name} ${item.contributor_l_name} (${item.contributor_role_name})`}
+        </p>
+        <p>
+          <strong>Rating:</strong> {item.rating_name !== null ? item.rating_name : "N/A"}
         </p>
       </div>
     </Popup>
