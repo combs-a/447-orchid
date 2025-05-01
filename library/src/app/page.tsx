@@ -60,7 +60,7 @@ export default function HomePage() {
   return (
     <main className="text-black">
       <Navigator user={user} setUser={setUser} />
-      <div className="flex flex-col items-center justify-center h-screen bg-white px-4 -mt-40">
+      <div className="flex flex-col items-center justify-center h-[150vh] bg-white px-4 -mt-72">
         <h1 className="text-6xl font-bold text-violet-800">
           Orchid Library
         </h1>
