@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 type NavigatorProps = {
-  user: { first_name: string; last_name: string; card_number: string } | null;
+  user: { first_name: string; last_name: string; card_number: string; } | null;
   setUser: (user: null) => void;
 };
 
