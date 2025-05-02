@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Account } from "@/types/account";
 
+import { itemTypeIds, genreIds, contributionRoleIds, ratingIds, booleanIds } from "@/components/account/picklists";
+
 type Loan = {
   loan_id: number;
   item_id: number;
@@ -46,18 +48,18 @@ export default function StaffPanel() {
   const [itemForm, setItemForm] = useState<ItemForm>({
     title: "",
     description: "",
-    item_type_id: "",
-    genre_id: "",
+    item_type_id: "1",
+    genre_id: "1",
     ISBN: "",
     publication_year: "",
     publication_date: "",
     publisher: "",
     issue_number: "",
-    explicit: "",
-    rating_id: "",
-    total_quantity: "",
-    quantity_available: "",
-    reservation_amount: "",
+    explicit: "0",
+    rating_id: "1",
+    total_quantity: "1",
+    quantity_available: "1",
+    reservation_amount: "0",
   });
 
   const [loans, setLoans] = useState<Loan[]>([]);
@@ -282,25 +284,35 @@ export default function StaffPanel() {
           </div>
           <div>
             <label className="block mb-1 font-semibold">Item Type ID</label>
-            <input
-              type="text"
+            <select
               value={itemForm.item_type_id}
               onChange={(e) =>
                 setItemForm({ ...itemForm, item_type_id: e.target.value })
               }
               className="border p-2 w-full rounded"
-            />
+            >
+              {itemTypeIds.map((option) => (
+                <option value={option.id}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label className="block mb-1 font-semibold">Genre ID</label>
-            <input
-              type="text"
+            <select
               value={itemForm.genre_id}
               onChange={(e) =>
                 setItemForm({ ...itemForm, genre_id: e.target.value })
               }
               className="border p-2 w-full rounded"
-            />
+            >
+              {genreIds.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label className="block mb-1 font-semibold">ISBN</label>
@@ -359,27 +371,37 @@ export default function StaffPanel() {
           </div>
           <div>
             <label className="block mb-1 font-semibold">
-              Explicit (0 for Yes, 1 for No)
+              Explicit
             </label>
-            <input
-              type="text"
+            <select
               value={itemForm.explicit}
               onChange={(e) =>
                 setItemForm({ ...itemForm, explicit: e.target.value })
               }
               className="border p-2 w-full rounded"
-            />
+            >
+              {booleanIds.map((option) => (
+                <option value={option.id}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label className="block mb-1 font-semibold">Rating ID</label>
-            <input
-              type="text"
+            <select
               value={itemForm.rating_id}
               onChange={(e) =>
                 setItemForm({ ...itemForm, rating_id: e.target.value })
               }
               className="border p-2 w-full rounded"
-            />
+            >
+              {ratingIds.map((option) => (
+                <option value={option.id}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label className="block mb-1 font-semibold">Total Quantity</label>
