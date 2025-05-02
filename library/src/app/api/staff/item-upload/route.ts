@@ -1,7 +1,7 @@
 // app/api/staff/item-upload/route.ts
 
 import { NextResponse } from "next/server";
-import mysql, { ResultSetHeader } from "mysql2/promise";
+import mysql, { ResultSetHeader, RowDataPacket } from "mysql2/promise";
 
 export async function POST(req: Request) {
     try {
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
       } = await req.json();
   
       // Validate required fields
-      if (!title || !description || !item_type_id || !genre_id || !publication_year || !publication_date || !publisher || !total_quantity || !quantity_available || !reservation_amount) {
+      if (!title || !description || !item_type_id || !genre_id || !publication_year || !publication_date || !publisher || !total_quantity || !quantity_available || !reservation_amount || (!contributor_first_name && !contributor_last_name) || !contribution_role_id) {
         return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
       }
   
@@ -97,18 +97,30 @@ export async function POST(req: Request) {
         );
         const itemId = itemResult.insertId;
 
-        // Upload contributor
-        const [contributorResult] = await connection.execute<ResultSetHeader>(
-          `INSERT INTO contributor (
-            first_name, last_name, middle_initial
-          ) VALUES (?, ?, ?)`,
-          [
-            contributor_first_name,
-            contributor_last_name,
-            contributor_middle_initial || null,
-          ]
-        );
-        const contributorId = contributorResult.insertId;
+        let contributorId = null;
+
+        // Check for existing contributor
+        const [existingContributor] = await connection.execute(
+          `SELECT contributor_id FROM contributor WHERE first_name = ? AND last_name = ?`,
+          [contributor_first_name, contributor_last_name]
+        ) as RowDataPacket[];
+
+        if (existingContributor.length > 0) {
+          contributorId = existingContributor[0].contributor_id;
+        } else {
+          // Upload new contributor
+          const [contributorResult] = await connection.execute<ResultSetHeader>(
+            `INSERT INTO contributor (
+              first_name, last_name, middle_initial
+            ) VALUES (?, ?, ?)`,
+            [
+              contributor_first_name,
+              contributor_last_name,
+              contributor_middle_initial || null,
+            ]
+          );
+          contributorId = contributorResult.insertId;
+        }
 
         // Insert contribution
         await connection.execute(
