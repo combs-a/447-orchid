@@ -8,14 +8,24 @@ import BookInfoPopup from "@/components/Inventory/bookInfoPopup";
 // Item type, serves to retrieve the relevant info for results from the API
 type Item = {
   item_id: number;
+  item_type_name: string;
   title: string;
   description: string;
-  quantity_available: number;
+  genre_name: number;
+  isbn: string;
   publication_year: number;
-  contributor_f_name: string; // First name of the contributor (concatenated at rendering)
-  contributor_middle_name: string; // Middle name of the contributor
-  contributor_l_name: string; // Last name of the contributor
-  contributor_role_name: string; // Role of the contributor
+  publication_date: string;
+  publisher: string;
+  issue_number: number | null;
+  explicit: boolean;
+  rating_name: number | null;
+  total_quantity: number;
+  quantity_available: number;
+  reservation_amount: number;
+  contributor_f_name: string | null;
+  contributor_middle_name: string | null;
+  contributor_l_name: string | null;
+  contributor_role_name: string | null;
 };
 
 type Contributor = {
@@ -26,12 +36,22 @@ type Contributor = {
 };
 
 type ProcessedItem = {
-  item_id: number;
-  title: string;
-  description: string;
-  quantity_available: number;
-  publication_year: number;
-  contributors: Contributor[];
+    item_id: number;
+    item_type_name: string;
+    title: string;
+    description: string;
+    genre_name: number;
+    isbn: string;
+    publication_year: number;
+    publication_date: string;
+    publisher: string;
+    issue_number: number | null;
+    explicit: boolean;
+    rating_name: number | null;
+    total_quantity: number;
+    quantity_available: number;
+    reservation_amount: number;
+    contributors: Contributor[];
 };
 
 export default function InventoryResults({
@@ -81,10 +101,20 @@ export default function InventoryResults({
     } else {
       processedItems.push({
         item_id: item.item_id,
+        item_type_name: item.item_type_name,     
         title: item.title,
         description: item.description,
-        quantity_available: item.quantity_available,
+        genre_name: item.genre_name,             
+        isbn: item.isbn,                         
         publication_year: item.publication_year,
+        publication_date: item.publication_date,  
+        publisher: item.publisher,               
+        issue_number: item.issue_number,         
+        explicit: item.explicit,                 
+        rating_name: item.rating_name,           
+        total_quantity: item.total_quantity,     
+        quantity_available: item.quantity_available,
+        reservation_amount: item.reservation_amount,  
         contributors: (contributor.first_name || contributor.last_name)
           ? [contributor]
           : [],
