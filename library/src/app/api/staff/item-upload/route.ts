@@ -20,6 +20,10 @@ export async function POST(req: Request) {
         total_quantity,
         quantity_available,
         reservation_amount,
+        contributor_first_name,
+        contributor_last_name,
+        contributor_middle_initial,
+        contribution_role_id,
       } = await req.json();
   
       // Validate required fields
@@ -58,34 +62,78 @@ export async function POST(req: Request) {
         total_quantity: totalQty,
         quantity_available: availableQty,
         reservation_amount: reservationAmt,
+        contributor_first_name,
+        contributor_last_name,
+        contributor_middle_initial,
+        contribution_role_id,
       });
   
-      const [result] = await connection.execute<ResultSetHeader>(
-        `INSERT INTO item (
-          title, description, item_type_id, genre_id, ISBN, publication_year, publication_date,
-          publisher, issue_number, explicit, rating_id, total_quantity, quantity_available, reservation_amount
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [
-          title,
-          description,
-          item_type_id,
-          genre_id,
-          ISBN || null,
-          publication_year,
-          publication_date,
-          publisher,
-          issue_number || null,
-          explicit || null,
-          rating_id || null,
-          totalQty,
-          availableQty,
-          reservationAmt,
-        ]
-      );
+      try {
+        // Create transaction to roll back if any record isn't uploaded successfully
+        await connection.beginTransaction();
+
+        // Upload item
+        const [itemResult] = await connection.execute<ResultSetHeader>(
+          `INSERT INTO item (
+            title, description, item_type_id, genre_id, ISBN, publication_year, publication_date,
+            publisher, issue_number, explicit, rating_id, total_quantity, quantity_available, reservation_amount
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [
+            title,
+            description,
+            item_type_id,
+            genre_id,
+            ISBN || null,
+            publication_year,
+            publication_date,
+            publisher,
+            issue_number || null,
+            explicit || null,
+            rating_id || null,
+            totalQty,
+            availableQty,
+            reservationAmt,
+          ]
+        );
+        const itemId = itemResult.insertId;
+
+        // Upload contributor
+        const [contributorResult] = await connection.execute<ResultSetHeader>(
+          `INSERT INTO contributor (
+            first_name, last_name, middle_initial
+          ) VALUES (?, ?, ?)`,
+          [
+            contributor_first_name,
+            contributor_last_name,
+            contributor_middle_initial || null,
+          ]
+        );
+        const contributorId = contributorResult.insertId;
+
+        // Insert contribution
+        await connection.execute(
+          `INSERT INTO contribution (
+            item_id, contributor_id, role_id
+          ) VALUES (?, ?, ?)`,
+          [
+            itemId,
+            contributorId,
+            contribution_role_id,
+          ]
+        );
+
+        await connection.commit();
+        await connection.end();
   
-      await connection.end();
-  
-      return NextResponse.json({ success: true, item_id: result.insertId });
+        return NextResponse.json({ success: true, item_id: itemResult.insertId });
+      } catch (error) {
+        // Rollback transaction on error
+        await connection.rollback();
+        await connection.end();
+
+        console.error("Upload error:", error);
+        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+      }
     } catch (error) {
       console.error("Upload error:", error);
       return NextResponse.json({ error: "Internal server error" }, { status: 500 });
