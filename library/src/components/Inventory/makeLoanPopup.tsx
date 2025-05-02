@@ -77,6 +77,12 @@ export default function MakeLoanPopup({
       </Popup>
     );
   }
+  // adding a max due date of 14 days from the loan out date
+  const maxDueDate =
+  loanOutDate &&
+  new Date(new Date(loanOutDate).getTime() + 14 * 24 * 60 * 60 * 1000)
+    .toISOString()
+    .split("T")[0];
 
   return (
     <Popup title={`Loan Item: ${item.title}`} onClose={onClose}>
@@ -97,7 +103,8 @@ export default function MakeLoanPopup({
           value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}
           className="border px-4 py-2 rounded w-full"
-          min={today}
+          min={loanOutDate||today}
+          max={maxDueDate}
         />
       </div>
       {error && <p className="text-red-600 mb-4">{error}</p>}

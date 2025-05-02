@@ -21,6 +21,7 @@ type Item = {
     contributor_middle_name: string | null;
     contributor_l_name: string | null;
     contributor_role_name: string | null;
+    earliest_due_date: string | null;
   };
 
 export async function GET(req: Request) {
@@ -68,7 +69,8 @@ export async function GET(req: Request) {
     co.first_name AS contributor_f_name,
     co.last_name AS contributor_l_name,
     co.middle_initial AS contributor_middle_name,
-    r.role_name AS contributor_role_name
+    r.role_name AS contributor_role_name,
+    l.earliest_due_date
   FROM item i
   LEFT JOIN item_type it ON i.item_type_id = it.item_type_id
   LEFT JOIN rating ra ON i.rating_id = ra.rating_id
@@ -76,6 +78,13 @@ export async function GET(req: Request) {
   LEFT JOIN contribution c ON i.item_id = c.item_id
   LEFT JOIN contributor co ON c.contributor_id = co.contributor_id
   LEFT JOIN contribution_role r ON c.role_id = r.role_id
+  LEFT JOIN (
+    SELECT item_id, MIN(due_date) AS earliest_due_date
+    FROM loan
+    WHERE return_date IS NULL
+    GROUP BY item_id) 
+    l ON i.item_id = l.item_id
+
 `;
 
 const params: (string | number)[] = [];
