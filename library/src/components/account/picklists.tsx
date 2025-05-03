@@ -45,7 +45,7 @@ export const contributionRoleIds = [
 ];
 
 export const ratingIds = [
-	{ id: undefined, name: 'N/A' },
+	{ id: "", name: 'N/A' },
 	{ id: 1, name: 'G' },
 	{ id: 2, name: 'PG' },
 	{ id: 3, name: 'PG-13' },
