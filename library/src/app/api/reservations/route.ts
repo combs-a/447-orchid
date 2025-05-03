@@ -97,6 +97,22 @@ export async function POST(req: Request) {
       [item_id, account_id, reservation_date, reservation_end_date]
     );
 
+    // update reservation amount in the `item` table
+    const updateItemSQL = `
+    UPDATE item
+    SET reservation_amount = reservation_amount + 1
+    WHERE item_id = ${item_id}
+  `;
+  console.log("Executing SQL:", updateItemSQL);
+
+  const [updateResult] = await connection.execute<ResultSetHeader>(
+    updateItemSQL
+  );
+
+  if (updateResult.affectedRows === 0) {
+    throw new Error("Failed to update reservation amount for the item.");
+  }
+  
     // Commit the transaction
     await connection.commit();
 
