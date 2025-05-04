@@ -24,6 +24,13 @@ export async function POST(req: Request) {
       [loan_id]
     );
 
+    // Update the item’s quantity_available by incrementing it by 1
+    await connection.execute(
+      `UPDATE item SET quantity_available = quantity_available + 1 
+      WHERE item_id = (SELECT item_id FROM loan WHERE loan_id = ?)`,
+      [loan_id]
+    );
+
     await connection.end();
 
     return NextResponse.json({ success: true });

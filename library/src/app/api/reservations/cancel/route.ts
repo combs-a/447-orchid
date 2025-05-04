@@ -17,11 +17,20 @@ export async function POST(req: Request) {
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
     });
-
+    await connection.execute(
+      `UPDATE item SET reservation_amount = reservation_amount - 1 
+      WHERE item_id = (SELECT item_id FROM reservation WHERE reservation_id = ?)`,
+      [reservation_id]
+    );
+    
     await connection.execute(
       `DELETE FROM reservation WHERE reservation_id = ?`,
       [reservation_id]
     );
+    
+    // Update the reservation_amount in the item table
+    
+
 
     await connection.end();
 
