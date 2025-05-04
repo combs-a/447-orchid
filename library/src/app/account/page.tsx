@@ -66,7 +66,7 @@ export default function AccountPage() {
       <Navigator user={user} setUser={setUser} />
       <div className="flex text-black h-[150vh] bg-white">
         {/* Sidebar */}
-        <aside className="w-1/4 border-r p-4 bg-gray-50 space-y-4">
+        <aside className="w-1/4 border-r p-4 bg-gray-50 h-[200vh] space-y-4">
           <button
             onClick={() => setView("details")}
             className="w-full text-left px-4 py-2 border rounded hover:bg-purple-100"
@@ -93,18 +93,17 @@ export default function AccountPage() {
           </button>
 
           {user.account_type_id === 2 && (
-    <button
-      onClick={() => setView("staff")}
-      className="w-full text-left px-4 py-2 border rounded hover:bg-purple-100"
-    >
-      Management
-    </button>
-  )}
-
+            <button
+              onClick={() => setView("staff")}
+              className="w-full text-left px-4 py-2 border rounded hover:bg-purple-100"
+            >
+              Management
+            </button>
+          )}
         </aside>
 
         {/* Main Content */}
-        <main className="w-3/4 p-6 border-t border-l bg-white text-black">
+        <main className="w-3/4 p-6 border-t bg-white text-black">
           {/* Details about account holder. */}
           {view === "details" && <AccountDetails user={user} />}
 

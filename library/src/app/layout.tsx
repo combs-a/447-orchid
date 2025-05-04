@@ -16,7 +16,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/icon.png" />
       </head>
-      <body className="antialiased text-black">{children}</body>
+      <body className="antialiased text-black bg-white">{children}</body>
     </html>
   );
 }
