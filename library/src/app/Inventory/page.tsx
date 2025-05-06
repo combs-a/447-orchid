@@ -7,6 +7,7 @@ import Results from "@/components/Inventory/results";
 import Filter from "@/components/Inventory/Filter";
 import Sort from "@/components/Inventory/Sort";
 import type { Account } from "@/app/account/page"; // Account type
+import { genreIds } from "@/components/account/picklists";
 
 export default function InventoryPage() {
   const router = useRouter();
@@ -160,13 +161,22 @@ export default function InventoryPage() {
               </div>
               <div>
                 <label className="block mb-1">Genre:</label>
-                <input
-                  type="text"
-                  placeholder="Enter genre name"
+                <select
                   value={genre}
-                  onChange={(e) => setGenre(e.target.value)}
-                  className="border px-4 py-2 rounded w-full"
-                />
+                  onChange={(e) =>
+                    setGenre(e.target.value)
+                  }
+                  className="border px-4 py-2 w-full rounded"
+                >
+                  <option key={0} value={''}>
+                    {'Select genre'}
+                  </option>
+                  {genreIds.map((option) => (
+                    <option key={option.id} value={option.name}>
+                      {option.name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label className="block mb-1">Age Rating:</label>
