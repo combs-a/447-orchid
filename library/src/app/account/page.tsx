@@ -11,7 +11,7 @@ import StaffPanel from "@/components/account/StaffPanel";
 
 type View = "details" | "history" | "reservations" | "settings" | "staff";
 
-type Account = {
+ export type Account = {
   account_id: number;
   first_name: string;
   last_name: string;
@@ -45,6 +45,7 @@ export default function AccountPage() {
         const data = await res.json();
         if (res.ok) {
           setUser(data);
+          localStorage.setItem("account_id", data.account_id);
         } else {
           console.error("User not found");
           router.push("/");

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 type NavigatorProps = {
-  user: { first_name: string; last_name: string; card_number: string } | null;
+  user: { first_name: string; last_name: string; card_number: string; } | null;
   setUser: (user: null) => void;
 };
 
@@ -15,7 +15,7 @@ export default function Navigator({ user, setUser }: NavigatorProps) {
   const navItems = [
     { name: 'Home', href: '/' },
     ...(user ? [{ name: 'Account', href: `/account?card=${user.card_number}` }] : []),
-    { name: 'Inventory', href: '/inventory' },
+    ...(user ? [{ name: "Inventory", href: "/Inventory" }] : []),
   ];
 
   return (
