@@ -35,6 +35,11 @@ type ItemForm = {
   total_quantity: string;
   quantity_available: string;
   reservation_amount: string;
+
+  contributor_first_name: string;
+  contributor_last_name: string;
+  contributor_middle_initial: string;
+  contribution_role_id: string;
 };
 
 export default function StaffPanel() {
@@ -58,6 +63,10 @@ export default function StaffPanel() {
     total_quantity: "",
     quantity_available: "",
     reservation_amount: "",
+    contributor_first_name: "",
+    contributor_last_name: "",
+    contributor_middle_initial: "",
+    contribution_role_id: "",
   });
 
   const [loans, setLoans] = useState<Loan[]>([]);
@@ -353,6 +362,39 @@ export default function StaffPanel() {
               value={itemForm.issue_number}
               onChange={(e) =>
                 setItemForm({ ...itemForm, issue_number: e.target.value })
+              }
+              className="border p-2 w-full rounded"
+            />
+          </div>
+          <div>
+            <label className="block mb-1 font-semibold">Creator First Name</label>
+            <input
+              type="text"
+              value={itemForm.contributor_first_name}
+              onChange={(e) =>
+                setItemForm({ ...itemForm, contributor_first_name: e.target.value })
+              }
+              className="border p-2 w-full rounded"
+            />
+          </div>
+          <div>
+            <label className="block mb-1 font-semibold">Creator Last Name</label>
+            <input
+              type="text"
+              value={itemForm.contributor_last_name}
+              onChange={(e) =>
+                setItemForm({ ...itemForm, contributor_last_name: e.target.value })
+              }
+              className="border p-2 w-full rounded"
+            />
+          </div>
+          <div>
+            <label className="block mb-1 font-semibold">Creator Role</label>
+            <input
+              type="text"
+              value={itemForm.contribution_role_id}
+              onChange={(e) =>
+                setItemForm({ ...itemForm, contribution_role_id: e.target.value })
               }
               className="border p-2 w-full rounded"
             />
