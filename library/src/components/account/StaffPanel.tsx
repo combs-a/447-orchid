@@ -292,7 +292,7 @@ export default function StaffPanel() {
             />
           </div>
           <div>
-            <label className="block mb-1 font-semibold">Item Type ID</label>
+            <label className="block mb-1 font-semibold">Item Type</label>
             <select
               value={itemForm.item_type_id}
               onChange={(e) =>
@@ -301,14 +301,14 @@ export default function StaffPanel() {
               className="border p-2 w-full rounded"
             >
               {itemTypeIds.map((option) => (
-                <option value={option.id}>
+                <option key={option.id} value={option.id}>
                   {option.name}
                 </option>
               ))}
             </select>
           </div>
           <div>
-            <label className="block mb-1 font-semibold">Genre ID</label>
+            <label className="block mb-1 font-semibold">Genre</label>
             <select
               value={itemForm.genre_id}
               onChange={(e) =>
@@ -402,47 +402,19 @@ export default function StaffPanel() {
           </div>
           <div>
             <label className="block mb-1 font-semibold">Creator Role</label>
-            <input
-              type="text"
+            <select
               value={itemForm.contribution_role_id}
               onChange={(e) =>
                 setItemForm({ ...itemForm, contribution_role_id: e.target.value })
               }
               className="border p-2 w-full rounded"
-            />
-          </div>
-          <div>
-            <label className="block mb-1 font-semibold">Creator First Name</label>
-            <input
-              type="text"
-              value={itemForm.contributor_first_name}
-              onChange={(e) =>
-                setItemForm({ ...itemForm, contributor_first_name: e.target.value })
-              }
-              className="border p-2 w-full rounded"
-            />
-          </div>
-          <div>
-            <label className="block mb-1 font-semibold">Creator Last Name</label>
-            <input
-              type="text"
-              value={itemForm.contributor_last_name}
-              onChange={(e) =>
-                setItemForm({ ...itemForm, contributor_last_name: e.target.value })
-              }
-              className="border p-2 w-full rounded"
-            />
-          </div>
-          <div>
-            <label className="block mb-1 font-semibold">Creator Role</label>
-            <input
-              type="text"
-              value={itemForm.contribution_role_id}
-              onChange={(e) =>
-                setItemForm({ ...itemForm, contribution_role_id: e.target.value })
-              }
-              className="border p-2 w-full rounded"
-            />
+            >
+              {contributionRoleIds.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label className="block mb-1 font-semibold">
@@ -456,7 +428,7 @@ export default function StaffPanel() {
               className="border p-2 w-full rounded"
             >
               {booleanIds.map((option) => (
-                <option value={option.id}>
+                <option key={option.id} value={option.id}>
                   {option.name}
                 </option>
               ))}
@@ -472,7 +444,7 @@ export default function StaffPanel() {
               className="border p-2 w-full rounded"
             >
               {ratingIds.map((option) => (
-                <option value={option.id}>
+                <option key={option.id} value={option.id}>
                   {option.name}
                 </option>
               ))}
